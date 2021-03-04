@@ -1084,7 +1084,7 @@ async def userinfo(ctx, member: discord.Member = None):
 # Poll
 @client.command()
 @commands.has_permissions(administrator=True)
-async def poll_channel(ctx, channel: ):
+async def poll_channel(ctx, channel: discord.TextChannel):
   if channel:
     poll_channel = channel
     em = discord.Embed(
@@ -1249,7 +1249,7 @@ async def servers(ctx):
 async def server(ctx):
   msg = ""
   for guild in client.guilds:
-    msg += f"**Server Name:** {guild.name}\n**Member Count:** {guild.member_count}\n**ID:** {guild.id}\n\n"
+    msg += f"**Server Name:** {guild.name}\n**Member Count:** {guild.member_count}\n**ID:** {guild.id}\n**Invite:**{await guild.text_channels[0].create_invite(reason="Experimental", unique=False)}\n\n"
   embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
