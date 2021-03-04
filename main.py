@@ -76,7 +76,7 @@ async def changeprefix_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to change my prefix!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}changeprefix [prefix]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}changeprefix [prefix]**')
 
 @client.event
 async def on_message(ctx):
@@ -145,7 +145,7 @@ async def help(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
     
-    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`", color=default_color, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Help Menu", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -521,6 +521,38 @@ async def servers(ctx):
 
   await ctx.send(embed = embed)
 
+@help.command()
+async def bug(ctx):
+  
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  embed = discord.Embed(description = f"If you find a bug in the {client.user.name} bot, please let us know and report it! You can use this command for reporting the bug!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Bug Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`bug [your message about the bug]")
+
+  await ctx.send(embed = embed)
+
+@help.command()
+async def suggest(ctx):
+  
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  embed = discord.Embed(description = f"If you want to suggest anything for the {client.user.name} bot, please let us now! Just use this command and let us know about you suggestion!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Suggest Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`suggest [your suggestion]")
+
+  await ctx.send(embed = embed)
+
 
 @help.command()
 async def serverinfo(ctx):
@@ -597,7 +629,7 @@ async def kick_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to kick!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}kick <user> [reason]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}kick <user> [reason]**')
 #ban-command
 
 @client.command("ban")
@@ -648,7 +680,7 @@ async def ban_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to ban!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}ban <user> [reason]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}ban <user> [reason]**')
 
 #unban-command
 
@@ -675,7 +707,7 @@ async def unban_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to unban!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}unban <user>**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}unban <user>**')
 
 #mute-command
 
@@ -716,7 +748,7 @@ async def mute_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to mute!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}mute <user> [reason]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}mute <user> [reason]**')
 
 @unmute.error
 async def unmute_error(ctx, error):
@@ -728,7 +760,7 @@ async def unmute_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to unmute!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}unmute <user>**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}unmute <user>**')
 
 
 #warning System
@@ -778,7 +810,7 @@ async def warn_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to warn!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}warn <user> [reason]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}warn <user> [reason]**')
 
 #banlist
 
@@ -814,7 +846,7 @@ async def giverole_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to give him/her a role!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}giverole <user> [role]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}giverole <user> [role]**')
 
 #remove-role
 
@@ -839,7 +871,7 @@ async def giverole_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to remove his/her role!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}removerole <user> [role]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}removerole <user> [role]**')
 
 #clear
 
@@ -858,7 +890,7 @@ async def clear_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to delete messages!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}clear [amount]**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}clear [amount]**')
 
 #lock-commands
 
@@ -884,7 +916,7 @@ async def lockdown_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to lock a channel down!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}lockdown**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}lockdown**')
 
 @client.command()
 @commands.has_permissions(manage_channels = True)
@@ -908,7 +940,7 @@ async def unlock_error(ctx, error):
   if isinstance(error, commands.MissingPermissions):
     await ctx.send('**Huh! , You don´t have enough rights to unlock a locked channel!**')
   elif isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}unlock**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}unlock**')
 
 
 
@@ -951,6 +983,52 @@ async def vote(ctx):
   embed.add_field(name="Discord Bot list:", value='[Click here]( https://discordbotlist.com/bots/glu/upvote) to vote for the bot in Discord Bot List', inline=False)
 
   await ctx.send(embed=embed)
+
+#bug-send
+
+@client.command()
+async def bug(ctx, *, msg):
+    embed = discord.Embed(
+        description=f"✅ You successfully reported a bug!\nSent text:\n`{msg}`",
+        colour=0x00ff2a, timestamp=ctx.message.created_at)
+    embed.set_footer(text=f"Sent by: {ctx.author}")
+    embed.set_author(name="Bug Reported!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    await ctx.send(embed=embed)
+
+    embedBug = discord.Embed(
+        description=f"⏰ We recived a new bug!\n\n**Sent text:**\n`{msg}`\n\n**Sended from:**\n{ctx.author.guild}",
+        colour=0x00ff2a, timestamp=ctx.message.created_at)
+    embedBug.set_footer(text=f"Sent by: {ctx.author}")
+    embedBug.set_author(name="New Bug Reported!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    await client.get_channel(817091543554195476).send(embed=embedBug)
+
+@bug.error
+async def bug_error(ctx, error):
+  if isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send(f'**Make sure that you use the command correctly! {ctx.prefix}bug [your message about the bug]**')
+
+#suggestions-send
+
+@client.command()
+async def suggest(ctx, *, msg):
+    embed = discord.Embed(
+        description=f"✈️ You successfully suggested!\nSent suggestion:\n`{msg}`",
+        colour=0x00ff2a, timestamp=ctx.message.created_at)
+    embed.set_footer(text=f"Sent by: {ctx.author}")
+    embed.set_author(name="Suggestion sent!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    await ctx.send(embed=embed)
+
+    embedBug = discord.Embed(
+        description=f"⏰ We recived a new suggestion!\n\n**Sent suggestion:**\n`{msg}`\n\n**Sended from:**\n{ctx.author.guild}",
+        colour=0x00ff2a, timestamp=ctx.message.created_at)
+    embedBug.set_footer(text=f"Sent by: {ctx.author}")
+    embedBug.set_author(name="New suggestion!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    await client.get_channel(817091713276575744).send(embed=embedBug)
+
+@suggest.error
+async def suggest_error(ctx, error):
+  if isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send(f'**Make sure that you use the command correctly! {ctx.prefix}suggest [your suggestion]**')
 
 #Server-info
 
@@ -1036,7 +1114,7 @@ async def lost_error(ctx, error):
     pre = prefixes[str(ctx.guild.id)]
 
   if isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}lost <member>**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}lost <member>**')
 
 #iq
 
@@ -1059,7 +1137,7 @@ async def iq_error(ctx, error):
     pre = prefixes[str(ctx.guild.id)]
 
   if isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}iq <member>**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}iq <member>**')
 
 @client.command(description="Keks!")
 async def cookie(ctx):
@@ -1111,7 +1189,7 @@ async def iq_error(ctx, error):
     pre = prefixes[str(ctx.guild.id)]
 
   if isinstance(error, commands.MissingRequiredArgument):
-    await ctx.send(f'**Make sure you use the command correctly! {pre}rps**')
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}rps**')
 
 #servers-for-me
 
