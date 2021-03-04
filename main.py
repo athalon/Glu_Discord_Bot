@@ -1083,7 +1083,7 @@ async def userinfo(ctx, member: discord.Member = None):
 
 # Poll
 @client.command()
-@commands.has_permissions(administator=True)
+@commands.has_permissions(administrator=True)
 async def poll_channel(ctx, channel: discord.TextChannel):
   if channel:
     poll_channel = channel
