@@ -23,7 +23,7 @@ def get_prefix(client, message):
 client = commands.Bot(command_prefix = get_prefix)
 
 client.remove_command('help')  #huhrensohn
-
+# Selber Hurensohn
 @client.event
 async def on_ready():
   print("Bot is Ready")
