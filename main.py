@@ -1021,7 +1021,7 @@ async def suggest(ctx, *, msg):
     await ctx.send(embed=embed)
 
     embedBug = discord.Embed(
-        description=f"⏰ We recived a new suggestion!\n\n**Sent suggestion:**\n`{msg}`\n\n**Sended from:**\n{ctx.author.guild}",
+        description=f"⏰ We recived a new suggestion!\n\n**Sent suggestion:**\n`{msg}`\n\n**Sent from:**\n{ctx.author.guild}",
         colour=0x00ff2a, timestamp=ctx.message.created_at)
     embedBug.set_footer(text=f"Sent by: {ctx.author}")
     embedBug.set_author(name="New suggestion!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -1084,7 +1084,7 @@ async def userinfo(ctx, member: discord.Member = None):
 # Poll
 @client.command()
 @commands.has_permissions(administrator=True)
-async def poll_channel(ctx, channel: discord.TextChannel):
+async def poll_channel(ctx, channel: ):
   if channel:
     poll_channel = channel
     em = discord.Embed(
