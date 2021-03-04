@@ -1079,6 +1079,47 @@ async def userinfo(ctx, member: discord.Member = None):
 
   await ctx.send(embed=embed)
 
+# Poll
+@client.command()
+@commands.has_permissions(administator=True)
+async def poll_channel(ctx, channel: discord.TextChannel):
+  if channel:
+    poll_channel = channel
+    em = discord.Embed(
+      description = f"Poll channel changed to {channel.name}",
+      colour = default_color,
+      timestamp = ctx.message.created_at
+    )
+    em.set_author(name="Poll Channel", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  else:
+    em = discord.Embed(
+      description = poll_channel.name,
+      colour = default_color,
+      timestamp = ctx.message.created_at
+    )
+    em.set_author(name="Poll Channel", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  await ctx.send(embed=em)
+
+@client.command()
+async def poll(ctx, *, poll):
+  em = discord.Embed(
+    description = poll,
+    colour = default_color,
+    timestamp = ctx.message.created_at
+  )
+  em.set_author(name=f"Poll by {str(ctx.message.author)}", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  poll_msg = await poll_channel.send(embed=em)
+  await poll_msg.add_reaction('✔️')
+  await poll_msg.add_reaction('🤷')
+  await poll_msg.add_reaction('❌')
+  em = discord.Embed(
+    description = f"The Poll was created!\nView it in {poll_channel.mention}",
+    colour = default_color,
+    timestamp = ctx.message.created_at
+  )
+  em.set_author(name=f"Poll created!", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  await ctx.send(embed=em)
+
 
 #fun
 #meme
