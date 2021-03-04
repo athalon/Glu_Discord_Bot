@@ -1084,24 +1084,16 @@ async def userinfo(ctx, member: discord.Member = None):
 # Poll
 @client.command()
 @commands.has_permissions(administrator=True)
-async def poll_channel(ctx, channel: ):
-  if channel:
-    poll_channel = channel
-    em = discord.Embed(
-      description = f"Poll channel changed to {channel.name}",
-      colour = default_color,
-      timestamp = ctx.message.created_at
-    )
-    em.set_author(name="Poll Channel", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  else:
-    em = discord.Embed(
-      description = poll_channel.name,
-      colour = default_color,
-      timestamp = ctx.message.created_at
-    )
-    em.set_author(name="Poll Channel", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  await ctx.send(embed=em)
-
+async def poll_channel(ctx, channel):
+  poll_channel = channel
+  em = discord.Embed(
+    description = f"Poll channel changed to {channel.name}",
+    colour = default_color,
+    timestamp = ctx.message.created_at
+  )
+  em.set_author(name="Poll Channel", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+	await ctx.send(embed=em)
+	
 @client.command()
 async def poll(ctx, *, poll):
   em = discord.Embed(
@@ -1249,8 +1241,8 @@ async def servers(ctx):
 async def server(ctx):
   msg = ""
   for guild in client.guilds:
-    msg += f"**Server Name:** {guild.name}\n**Member Count:** {guild.member_count}\n**ID:** {guild.id}\n\n"
-  embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
+    msg += f"**Server Name:** `{guild.name}`\n**Member Count:** `{guild.member_count}`\n**ID:** {guild.id}\n\n"
+  embed = discord.Embed(description=f"The `{client.user.name}` is currently on `{len(client.guilds)}` Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
