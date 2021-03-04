@@ -979,8 +979,8 @@ async def vote(ctx):
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name=f"Vote for {client.user.name}", icon_url="https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128")
 
-  embed.add_field(name="Top.gg", value='I am still waiting to be accepted in top.gg!', inline=false)
-  embed.add_field(name="Discord Bot list:", value='[Click here]( https://discordbotlist.com/bots/glu/upvote) to vote for the bot in Discord Bot List', inline=false)
+  embed.add_field(name="Top.gg", value='I am still waiting to be accepted in top.gg!', inline=False)
+  embed.add_field(name="Discord Bot list:", value='[Click here]( https://discordbotlist.com/bots/glu/upvote) to vote for the bot in Discord Bot List', inline=False)
 
   await ctx.send(embed=embed)
 
@@ -1151,7 +1151,7 @@ async def iq_error(ctx, error):
 async def servers(ctx):
   embed = discord.Embed(description=f"The {client.user.name} is currently on `{len(client.guilds)}` Servers!\nNot that many but I'm happy about every server that I am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
   embed.set_footer(text=client.user.name)
-  embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.set_author(name="In how many servers do i am?", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
   await ctx.send(embed=embed)
 
 
