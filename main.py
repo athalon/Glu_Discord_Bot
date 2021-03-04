@@ -12,6 +12,8 @@ import os
 
 TOKEN = os.getenv("BOT_TOKEN")
 
+default_color = 0xff0000
+
 #prefix
 
 def get_prefix(client, message):
@@ -58,7 +60,7 @@ async def changeprefix(ctx, prefix):
   with open('prefixes.json', 'w') as f:
     json.dump(prefixes, f, indent=4)
     
-    embed = discord.Embed(description = f"I have changed the prefix for this Server to `{prefix}`",  color=0xff0000, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description = f"I have changed the prefix for this Server to `{prefix}`",  color=default_color, timestamp=ctx.message.created_at)
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Prefix Changed!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
     
@@ -89,7 +91,7 @@ async def on_message(ctx):
 
             embed=discord.Embed(#title="#", 
             description=f"My prefix here is `{pre}`", 
-            color=0xff0000
+            color=default_color
             )
             embed.set_footer(text=f"{client.user.name} | Since 28.02.2021")
             embed.set_author(name=f"My Prefix in {ctx.guild.name}", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -143,7 +145,7 @@ async def help(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
     
-    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Informations\n`serverinfo`, `userinfo`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`", color=0xff0000, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Informations\n`serverinfo`, `userinfo`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`", color=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Help Menu", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -158,7 +160,7 @@ async def kick(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Kicks a member from the Server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Kicks a member from the Server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Kick Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -174,7 +176,7 @@ async def ban(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Bans a member from the Server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Bans a member from the Server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Ban Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -190,7 +192,7 @@ async def unban(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Unbans a banned member from the Server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Unbans a banned member from the Server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Unban Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -206,7 +208,7 @@ async def clear(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Clears an amount of messages! The best choice to nuke channels!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Clears an amount of messages! The best choice to nuke channels!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Clear Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -222,7 +224,7 @@ async def mute(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Mutes a member in your Server! (The muted Member cannot write in chats or speak in Voice channels!)", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Mutes a member in your Server! (The muted Member cannot write in chats or speak in Voice channels!)", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Mute Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -238,7 +240,7 @@ async def unmute(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Unmutes a muted member!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Unmutes a muted member!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Unmute Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -254,7 +256,7 @@ async def giverole(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Gives a member a role!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Gives a member a role!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Giverole Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -270,7 +272,7 @@ async def removerole(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Removes a role from a member!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Removes a role from a member!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Removerole Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -286,7 +288,7 @@ async def warn(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Warns a member from a Server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Warns a member from a Server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Warn Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -302,7 +304,7 @@ async def lockdown(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Locks a Channel down, so nobody can wirte anymore in it!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Locks a Channel down, so nobody can wirte anymore in it!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Lockdown Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -318,7 +320,7 @@ async def unlock(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Unlockes a locked channel!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Unlockes a locked channel!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Unlock Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -335,7 +337,7 @@ async def lost(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Shows how lost a member is!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Shows how lost a member is!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Lost Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -351,7 +353,7 @@ async def meme(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Posts a random meme!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Posts a random meme!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Meme Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -367,7 +369,7 @@ async def iq(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Shows the Iq of a Member!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Shows the Iq of a Member!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Iq Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -383,7 +385,7 @@ async def cookie(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Sends random Cookie Pic´s! (Custom Command for Gregyr#3119)", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Sends random Cookie Pic´s! (Custom Command for Gregyr#3119)", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Cookie Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -399,7 +401,7 @@ async def rps(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Ths bot plays with you Rock, Paper, Scissors!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Ths bot plays with you Rock, Paper, Scissors!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Cookie Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -415,7 +417,7 @@ async def giveaway(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Answer the questions from the bot and make a giveaway!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Answer the questions from the bot and make a giveaway!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Giveaway Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -431,7 +433,7 @@ async def reroll(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Reroll a giveaway!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Reroll a giveaway!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Reroll Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -447,7 +449,7 @@ async def changeprefix(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Changes my prefix on this Server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Changes my prefix on this Server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Changeprefix Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -463,7 +465,7 @@ async def ping(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Shows the latency of the bot!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Shows the latency of the bot!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Ping Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -479,7 +481,7 @@ async def invite(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = f"Shows you, how to get the {client.user.name} bot on your Server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = f"Shows you, how to get the {client.user.name} bot on your Server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Invite Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -495,7 +497,7 @@ async def support(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = f"Shows you, how to get ont the Support server for the {client.user.name} bot!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = f"Shows you, how to get ont the Support server for the {client.user.name} bot!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Support Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -511,7 +513,7 @@ async def servers(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Shows, on how many servers the bot is!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Shows, on how many servers the bot is!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -523,7 +525,7 @@ async def servers(ctx):
 @help.command()
 async def serverinfo(ctx):
 
-  embed = discord.Embed(description = "Shows some infos about this server!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Shows some infos about this server!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Serverinfo Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -534,7 +536,7 @@ async def serverinfo(ctx):
 @help.command()
 async def userinfo(ctx):
 
-  embed = discord.Embed(description = "Shows some infos about a User!", color=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "Shows some infos about a User!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Userinfo Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -556,7 +558,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
         embed = discord.Embed(
             #title = "Kicked!",
             description = f"Kicked `{str(member)}` for `{reason}`",
-            color = 0xff0000,
+            color = default_color,
              timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -567,7 +569,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
             title = "You have been Kicked",
             icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128',
             description = f"You have been kicked by a moderator for: `{reason}`\nServer: `{ctx.guild.name}`",
-            color = 0xff0000,
+            color = default_color,
             timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -577,7 +579,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
         embed = discord.Embed(
             #title = "Error!",
             description = "I can't kick bots :smile:",
-            color = 0xff0000,
+            color = default_color,
             timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -607,7 +609,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
         embed = discord.Embed(
             #title = "Banned!",
             description = f"Banned `{str(member)}` for `{reason}`",
-            color = 0xff0000,
+            color = default_color,
              timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -618,7 +620,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
             title = "You have been Banned",
             icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128',
             description = f"You have been banned by a moderator for: `{reason}`\nServer: `{ctx.guild.name}`",
-            color = 0xff0000,
+            color = default_color,
             timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -628,7 +630,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
         embed = discord.Embed(
             #title = "Error!",
             description = "I can't ban bots :smile:",
-            color = 0xff0000,
+            color = default_color,
             timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -688,7 +690,7 @@ async def mute(ctx, member: discord.Member, *, reason=None):
 
         for channel in guild.channels:
             await channel.set_permissions(mutedRole, speak=False, send_messages=False)
-    embed = discord.Embed(title="Muted", description=f"I have muted {member.mention}", colour=0xff0000, timestamp=ctx.message.created_at)
+    embed = discord.Embed(title="Muted", description=f"I have muted {member.mention}", colour=default_color, timestamp=ctx.message.created_at)
     embed.add_field(name="Reason:", value=reason, inline=False)
     await ctx.send(embed=embed)
     await member.add_roles(mutedRole, reason=reason)
@@ -701,7 +703,7 @@ async def unmute(ctx, member: discord.Member):
 
    await member.remove_roles(mutedRole)
    await member.send(f"You have unmuted from: `{ctx.guild.name}`")
-   embed = discord.Embed(title="Unmuted!", description=f"I have unmuted {member.mention}!",colour=0xff0000, timestamp=ctx.message.created_at)
+   embed = discord.Embed(title="Unmuted!", description=f"I have unmuted {member.mention}!",colour=default_color, timestamp=ctx.message.created_at)
    await ctx.send(embed=embed)
 
 @mute.error
@@ -771,7 +773,7 @@ async def warn(ctx, member: discord.Member, *, reason=None):
 
         embed = discord.Embed(
             description = f"Warned `{str(member)}` for `{reason}`",
-            color = 0xff0000,
+            color = default_color,
              timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -782,7 +784,7 @@ async def warn(ctx, member: discord.Member, *, reason=None):
             title = "You have been Warned",
             icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128',
             description = f"You have been warned by a moderator for: `{reason}`\nServer: `{ctx.guild.name}`",
-            color = 0xff0000,
+            color = default_color,
             timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -790,7 +792,7 @@ async def warn(ctx, member: discord.Member, *, reason=None):
     else:
         embed = discord.Embed(
             description = "I can't warn bots :smile:",
-            color = 0xff0000,
+            color = default_color,
             timestamp=ctx.message.created_at
         )
         embed.set_footer(text=f"{client.user.name}")
@@ -827,7 +829,7 @@ async def banlist(ctx):
 @commands.has_permissions(manage_roles=True)
 async def giverole(ctx, user: discord.Member, role: discord.Role):
     await user.add_roles(role)
-    embed = discord.Embed(description=f"I gave `{ctx.author.name}` the `{role.name}` role!",colour=0xff0000, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description=f"I gave `{ctx.author.name}` the `{role.name}` role!",colour=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Gave Role!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -852,7 +854,7 @@ async def giverole_error(ctx, error):
 @commands.has_permissions(manage_roles=True)
 async def removerole(ctx, user: discord.Member, role: discord.Role):
     await user.remove_roles(role)
-    embed = discord.Embed(description=f"I have removed the `{role.name}` role from `{ctx.author.name}`!",colour=0xff0000, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description=f"I have removed the `{role.name}` role from `{ctx.author.name}`!",colour=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Removed Role!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -896,7 +898,7 @@ async def clear_error(ctx, error):
 @commands.has_permissions(manage_channels = True)
 async def lockdown(ctx):
 
-    embed=discord.Embed(description=f":warning: {ctx.channel.mention} ***has been locked***", colour=0xff0000, timestamp=ctx.message.created_at)
+    embed=discord.Embed(description=f":warning: {ctx.channel.mention} ***has been locked***", colour=default_color, timestamp=ctx.message.created_at)
     
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Lockdown!", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -952,7 +954,7 @@ async def ping(ctx):
 
 @client.command()
 async def invite(ctx):
-  embed=discord.Embed(title="Click here to invite me to your Server", url="https://discord.com/api/oauth2/authorize?client_id=815665893660033064&permissions=8&scope=bot", description=":heart: I would love to join your Server!", colour=0xff0000, timestamp=ctx.message.created_at)
+  embed=discord.Embed(title="Click here to invite me to your Server", url="https://discord.com/api/oauth2/authorize?client_id=815665893660033064&permissions=8&scope=bot", description=":heart: I would love to join your Server!", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_thumbnail(url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -961,7 +963,7 @@ async def invite(ctx):
 
 @client.command()
 async def support(ctx):
-  embed=discord.Embed(title="Click here to join the support Server", url="https://discord.gg/aCqw38Xv6g", description="Just join the Server and open a Ticket!", colour=0xff0000, timestamp=ctx.message.created_at)
+  embed=discord.Embed(title="Click here to join the support Server", url="https://discord.gg/aCqw38Xv6g", description="Just join the Server and open a Ticket!", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_thumbnail(url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -993,7 +995,7 @@ async def serverinfo(ctx):
    
   embed = discord.Embed(
       description=f"**:crown:Owner**\n{owner}\n**:id:Server ID**\n{id}\n**:map:Region**\n{region}\n**:bust_in_silhouette:Member Count**\n{memberCount} Member\n**:eyes:Number of roles**\n{role_count} Roles\n**:moneybag:Highest Role**\n{ctx.guild.roles[-2]}\n**:robot:Bots**\n{(', '.join(list_of_bots))} (Beta function!)\n**:clock:Created at**\n{ctx.guild.created_at.__format__('%A, %d. %B %Y at %H:%M:%S')}",
-      colour=0xff0000, timestamp=ctx.message.created_at
+      colour=default_color, timestamp=ctx.message.created_at
     )
   embed.set_footer(text=client.user.name, icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
   embed.set_author(name=f"Serverinfo {name}")
@@ -1009,7 +1011,7 @@ async def userinfo(ctx, member: discord.Member = None):
   member = ctx.author if not member else member
   roles = (role for role in member.roles)
 
-  embed = discord.Embed(colour=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_author(name=f"Userinfo - {member}")
   embed.set_thumbnail(url=member.avatar_url)
@@ -1036,7 +1038,7 @@ async def meme(ctx):
   async with aiohttp.ClientSession() as cs:
     async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
         res = await r.json()
-        embed = discord.Embed(colour=0xff0000, timestamp=ctx.message.created_at)
+        embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
         embed.set_author(name="Random Meme", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
         embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
         await ctx.send(embed=embed)
@@ -1047,7 +1049,7 @@ async def meme(ctx):
 @client.command()
 async def lost(ctx, member: discord.Member = None):
   embed = discord.Embed(
-    description=f"{member.mention} is `{randrange(10, 101)}%` lost", colour=0xff0000)
+    description=f"{member.mention} is `{randrange(10, 101)}%` lost", colour=default_color)
 
   embed.set_author(name=f"Is {member} lost?")
   embed.set_image(url='https://imgur.com/BekIvVW')
@@ -1070,7 +1072,7 @@ async def lost_error(ctx, error):
 async def iq(ctx, member: discord.Member = None):
   messages = ["Wow, impressive!", "Not bad!", "WHOAAA!", "Smart!", "Pretty Smart!", "Bruh"]
   embed = discord.Embed(
-    description=f"{member.mention} has an IQ of `{randrange(10, 251)}`! {random.choice(messages)}", colour=0xff0000, timestamp=ctx.message.created_at)
+    description=f"{member.mention} has an IQ of `{randrange(10, 251)}`! {random.choice(messages)}", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_author(name=f"Is {member} lost?")
   embed.set_footer(text=f"Requested by {ctx.author}")
@@ -1143,7 +1145,7 @@ async def iq_error(ctx, error):
 
 @client.command()
 async def servers(ctx):
-  embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -1155,7 +1157,7 @@ async def servers(ctx):
 @client.command()
 @commands.has_role(816399671702454323)
 async def serve(ctx):
-  embed = discord.Embed(description=f"The {client.user.name} is currently on {client.guilds} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=0xff0000, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description=f"The {client.user.name} is currently on {client.guilds} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
