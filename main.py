@@ -1084,7 +1084,7 @@ async def userinfo(ctx, member: discord.Member = None):
 # Poll
 @client.command()
 @commands.has_permissions(administrator=True)
-async def poll_channel(ctx, channel: discord.TextChannel):
+async def poll_channel(ctx, channel: ):
   if channel:
     poll_channel = channel
     em = discord.Embed(
