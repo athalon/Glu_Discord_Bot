@@ -1146,26 +1146,19 @@ async def iq_error(ctx, error):
   if isinstance(error, commands.MissingRequiredArgument):
     await ctx.send(f'**Make sure you use the command correctly! {pre}rps**')
 
-#how-many-servers
-
-@client.command()
-async def servers(ctx):
-  embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
-
-  embed.set_footer(text=f"{client.user.name}")
-  embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-
-  await ctx.send(embed=embed)
-
 #servers-for-me
 
 @client.command()
 @commands.has_role(816399671702454323)
-async def serve(ctx):
-  embed = discord.Embed(description=f"The {client.user.name} is currently on {client.guilds} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
+async def server(ctx):
+  msg = ""
+  for guild in client.guilds:
+    msg += f"Server Name: {guild.name}\nMember Count: {guild.member_count}\nID: {guild.id}\n\n"
+  embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name="Server List:", value=msg, inline=False)
 
   await ctx.send(embed=embed)
 
