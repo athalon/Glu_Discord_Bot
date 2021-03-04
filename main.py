@@ -972,16 +972,15 @@ async def support(ctx):
 
 #vote
 
-#vote
-
 @client.command()
 async def vote(ctx):
-  embed=discord.Embed(colour=0xff0000, timestamp=ctx.message.created_at)
+  embed=discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name=f"Vote for {client.user.name}", icon_url="https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128")
 
-  embed.add_field(name="Bot list:", value='[Click here to vote for the bot]( https://discordbotlist.com/bots/glu/upvote )')
+  embed.add_field(name="Top.gg", value='I am still waiting to be accepted in top.gg!', inline=false)
+  embed.add_field(name="Discord Bot list:", value='[Click here]( https://discordbotlist.com/bots/glu/upvote) to vote for the bot in Discord Bot List', inline=false)
 
   await ctx.send(embed=embed)
 
