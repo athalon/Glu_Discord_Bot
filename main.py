@@ -1152,7 +1152,7 @@ async def iq_error(ctx, error):
 async def server(ctx):
   msg = ""
   for guild in client.guilds:
-    msg += f"Server Name: {guild.name}\nMember Count: {guild.member_count}\nID: {guild.id}\n\n"
+    msg += f"**Server Name:** {guild.name}\n**Member Count:** {guild.member_count}\n**ID:** {guild.id}\n\n"
   embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
