@@ -817,13 +817,31 @@ async def warn_error(ctx, error):
 #banlist
 
 @client.command()
+@commands.has_permissions(ban_members=True)
 async def banlist(ctx):
-    guild = ctx.guild
+  bans = await ctx.guild.bans()
+  msg = ""
+  for ban in bans:
+    msg += f"**Username:** `{str(ban.user)}`\n**Reason:** `{ban.reason}`\n**ID:** `{ban.user.id}`\n\n"
+  embed = discord.Embed(description=f"The `{client.user.name}` Bot has found `{len(bans)}` Bans in the server!", colour=default_color, timestamp=ctx.message.created_at)
+  
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Bans", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name="Server List:", value=msg, inline=False)
+  
+  await ctx.send(embed=embed)
 
-    bans = await guild.bans()
-    banlar = []
-    for ban in bans:
-        await ctx.send(ban)
+@banlist.error
+async def banlist_error(ctx, error):
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  if isinstance(error, commands.MissingPermissions):
+    await ctx.send('**Huh! , You don´t have enough rights to view the ban list!**')
+  elif isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}banlist**')
 
 #give-role
 
@@ -1082,17 +1100,15 @@ async def userinfo(ctx, member: discord.Member = None):
   await ctx.send(embed=embed)
 
 @client.command()
-async def poll(ctx, channel: discord.TextChannel, poll):
+async def poll(ctx, channel: discord.TextChannel, msg):
   em = discord.Embed(
-    description = poll,
+    description = f"{msg}",
     colour = default_color,
     timestamp = ctx.message.created_at
   )
   em.set_author(name=f"Poll by {str(ctx.message.author)}", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  poll_msg = await poll_channel.send(embed=em)
-  await poll_msg.add_reaction('✔️')
-  await poll_msg.add_reaction('🤷')
-  await poll_msg.add_reaction('❌')
+  await poll_channel.send(embed=em)
+  
   em = discord.Embed(
     description = f"The Poll was created!\nView it in {poll_channel.mention}",
     colour = default_color,
