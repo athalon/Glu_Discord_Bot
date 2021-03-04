@@ -1248,10 +1248,16 @@ async def servers(ctx):
 @commands.has_role(816399671702454323)
 async def server(ctx):
   msg = ""
+  print("Command Recieved")
   for guild in client.guilds:
-    guild_inv = guild.text_channels[0].create_invite(reason="Experimental"; unique=False)
+    print("Going through Guild...")
+    guild_inv = guild.text_channels[0].create_invite(reason="Experimental", unique=False)
+    print("Guild Invite Made...")
     msg += f"**Server Name:** {guild.name}\n**Member Count:** {guild.member_count}\n**ID:** {guild.id}\n**Invite:**{guild_inv}\n\n"
+    print("Message appended")
+  print("Sending Message...")
   embed = discord.Embed(description=f"The {client.user.name} is currently on {len(client.guilds)} Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
+  print("Message Sent!")
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
