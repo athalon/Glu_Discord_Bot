@@ -1,0 +1,2 @@
+kick command dm! (footer)
+unban command embed (215)
