@@ -731,38 +731,6 @@ async def unmute_error(ctx, error):
     await ctx.send(f'**Make sure you use the command correctly! {pre}unmute <user>**')
 
 
-@client.command()
-async def tempmute(ctx, member: discord.Member, time: int, d, *, reason=None):
-    guild = ctx.guild
-
-    for role in guild.roles:
-        if role.name == "Muted":
-            await member.add_roles(role)
-
-            embed = discord.Embed(title="muted!", description=f"{member.mention} has been tempmuted ", colour=discord.Colour.light_gray())
-            embed.add_field(name="reason:", value=reason, inline=False)
-            embed.add_field(name="time left for the mute:", value=f"{time}{d}", inline=False)
-            await ctx.send(embed=embed)
-
-            if d == "s":
-                await asyncio.sleep(time)
-
-            if d == "m":
-                await asyncio.sleep(time*60)
-
-            if d == "h":
-                await asyncio.sleep(time*60*60)
-
-            if d == "d":
-                await asyncio.sleep(time*60*60*24)
-
-            await member.remove_roles(role)
-
-            embed = discord.Embed(title="unmute (temp) ", description=f"unmuted -{member.mention} ", colour=discord.Colour.light_gray())
-            await ctx.send(embed=embed)
-
-            return
-
 #warning System
 
 @client.command()
