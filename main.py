@@ -14,6 +14,8 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 default_color = 0xff0000
 
+poll_channel = None
+
 #prefix
 
 def get_prefix(client, message):
