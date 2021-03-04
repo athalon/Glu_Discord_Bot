@@ -1081,22 +1081,8 @@ async def userinfo(ctx, member: discord.Member = None):
 
   await ctx.send(embed=embed)
 
-# Poll
 @client.command()
-@commands.has_permissions(administrator=True)
-async def poll_channel(ctx, channel):
-  global poll_channel
-  poll_channel = channel
-  em = discord.Embed(
-    description = f"Poll channel changed to {channel.name}",
-    colour = default_color,
-    timestamp = ctx.message.created_at
-  )
-  em.set_author(name="Poll Channel", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  await ctx.send(embed=em)
-	
-@client.command()
-async def poll(ctx, *, poll):
+async def poll(ctx, channel: discord.TextChannel, poll):
   em = discord.Embed(
     description = poll,
     colour = default_color,
@@ -1112,8 +1098,8 @@ async def poll(ctx, *, poll):
     colour = default_color,
     timestamp = ctx.message.created_at
   )
-  em.set_author(name=f"Poll created!", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  await ctx.send(embed=em)
+  em.set_author(name="Poll created!", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  await channel.send(embed=em)
 
 
 #fun
