@@ -1,15 +1,15 @@
 import discord
-from discord.ext import commands, tasks
 import json
 import aiohttp
-from discord.ext.commands.converter import MessageConverter
 import keep_alive
-from time import sleep as sl
-from random import randrange
-from itertools import cycle
 import random
 import asyncio
 import os
+from discord.ext import commands, tasks
+from time import sleep as sl
+from random import randrange
+from itertools import cycle
+from discord.ext.commands.converter import MessageConverter
 
 TOKEN = os.getenv("BOT_TOKEN")
 
@@ -128,7 +128,7 @@ async def on_ready():
   change_status.start()
   print("Bot is ready!")
 
-status = cycle(['early access! (Beta Phase)', 'ping me for prefix'])
+status = cycle(['early access! (Beta Phase!)', 'ping me for prefix'])
 
 @tasks.loop(seconds=5)
 async def change_status():
@@ -144,7 +144,7 @@ async def help(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
     
-    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `banlist`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`, `dog`, `cat`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`, `poll`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `banlist`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`, `dog`, `cat`, `coinflip`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`, `poll`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Help Menu", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -450,11 +450,27 @@ async def rps(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
 
-  embed = discord.Embed(description = "Ths bot plays with you Rock, Paper, Scissors!", color=default_color, timestamp=ctx.message.created_at)
+  embed = discord.Embed(description = "The bot plays with you Rock, Paper, Scissors!", color=default_color, timestamp=ctx.message.created_at)
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Cookie Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
   embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`rps")
+
+  await ctx.send(embed = embed)
+
+@help.command()
+async def coinflip(ctx):
+  
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  embed = discord.Embed(description = "The bot flips a coin for you!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Coinflip Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`coinflip")
 
   await ctx.send(embed = embed)
 
@@ -632,7 +648,7 @@ async def poll(ctx):
 
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Poll Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{ctx.prefix}`poll [poll message]")
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{ctx.prefix}`poll")
 
   await ctx.send(embed = embed)
 
@@ -1366,6 +1382,20 @@ async def iq_error(ctx, error):
 
   if isinstance(error, commands.MissingRequiredArgument):
     await ctx.send(f'**Make sure that you use the command correctly! {pre}rps**')
+
+#coinflip
+
+@client.command()
+async def coinflip(ctx):
+  messages = ["number", "head"]
+  embed = discord.Embed(
+    description=f"{ctx.author.mention}, the coin landed on the {random.choice(messages)}!", colour=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_author(name=f"Coinflip")
+  embed.set_footer(text=f"Requested by {ctx.author}")
+  
+  await ctx.send(embed=embed)
+
 
 #servers
 
