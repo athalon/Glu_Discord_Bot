@@ -107,17 +107,17 @@ async def on_message(message):
 
 #no-command-error
 
-@client.event
-async def on_command_error(ctx, error):
-  if isinstance(error, commands.CommandNotFound):
-   
-    with open("prefixes.json", "r") as f:
-      prefixes = json.load(f)
-      
-      pre = prefixes[str(ctx.guild.id)]
-    await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
-  elif isinstance(error, commands.BotMissingPermissions):
-    await ctx.channel.send('**Oof, i dont have enough rights to do this!')
+#@client.event
+#async def on_command_error(ctx, error):
+#  if isinstance(error, commands.CommandNotFound):
+#   
+#    with open("prefixes.json", "r") as f:
+#      prefixes = json.load(f)
+#      
+#      pre = prefixes[str(ctx.guild.id)]
+#    await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
+#  elif isinstance(error, commands.BotMissingPermissions):
+#    await ctx.channel.send('**Oof, i dont have enough rights to do this!')
 
 #bot-not-enough-rights
 
@@ -148,6 +148,7 @@ async def help(ctx):
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Help Menu", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    embed.set_image(url='https://cdn.discordapp.com/attachments/817091136207585371/817413681298014238/standard.gif')
 
   await ctx.send(embed = embed)
 
@@ -1240,11 +1241,12 @@ async def cat(ctx):
 
 @client.command()
 async def lost(ctx, member: discord.Member = None):
+  messages = ["very lost", "Not so lost", "not lost", "pretty lost", "completely lost", "extemly lost"]
   embed = discord.Embed(
-    description=f"{member.mention} is `{randrange(10, 101)}%` lost", colour=default_color)
+    description=f"{member.mention} is `{random.choice(messages)}`!", colour=default_color)
 
   embed.set_author(name=f"Is {member} lost?")
-  embed.set_image(url='https://imgur.com/BekIvVW')
+  embed.set_image(url='https://cdn.discordapp.com/attachments/814530957150650419/817416742313394216/Lost.png')
 
   await ctx.send(embed=embed)
 
