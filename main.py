@@ -1160,30 +1160,60 @@ async def userinfo(ctx, member: discord.Member = None):
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
-async def poll(ctx, channel: discord.TextChannel, msg):
+async def poll(ctx):
+    await ctx.send("**Please answer a few following questions!**")
 
-  em = discord.Embed(
+    questions = ["`In which channel should the poll be in?`", 
+                "`What should be the text of the poll?`"]
+
+    answers = []
+
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel 
+
+    for i in questions:
+        await ctx.send(i)
+
+        try:
+            msg = await client.wait_for('message', timeout=30.0, check=check)
+        except asyncio.TimeoutError:
+            await ctx.send('You didn\'t answer in time, please be quicker next time!')
+            return
+        else:
+            answers.append(msg.content)
+    try:
+        c_id = int(answers[0][2:-1])
+    except:
+        await ctx.send(f"You didn't mention a channel properly. Do it like this {ctx.channel.mention} next time.")
+        return
+
+    channel = client.get_channel(c_id)
+
+    polltext = (answers[1])        
+
+    em = discord.Embed(
     description = f"✅ The Poll was created! \n➡️ View it in {channel.mention}",
-    colour = default_color,
+    colour = 0xff0000,
     timestamp = ctx.message.created_at
   )
-  em.set_author(name="Poll created!", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  em.set_footer(text=client.user.name)
-  await ctx.send(embed=em)
+    em.set_author(name="Poll created!", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    em.set_footer(text=client.user.name)
+    await ctx.send(embed=em)
 
-  embed = discord.Embed(
-    description = f"{msg}",
-    colour = default_color,
+
+    embed = discord.Embed(
+    description = f"{polltext}",
+    colour = 0xff0000,
     timestamp = ctx.message.created_at
   )
-  embed.set_author(name=f"Poll by {str(ctx.message.author)}", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  embed.set_footer(text=client.user.name)
+    embed.set_author(name=f"Poll by {str(ctx.message.author)}", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    embed.set_footer(text=client.user.name)
 
-  pollreaction = await channel.send(embed = embed)
+    pollreaction = await channel.send(embed = embed)
   
-  await pollreaction.add_reaction("✅")
-  await pollreaction.add_reaction("🤷🏻‍♀️")
-  await pollreaction.add_reaction("❎")
+    await pollreaction.add_reaction("✅")
+    await pollreaction.add_reaction("🤷🏻‍♀️")
+    await pollreaction.add_reaction("❎")
 
 @poll.error
 async def poll_error(ctx, error):
