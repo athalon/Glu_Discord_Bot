@@ -107,23 +107,19 @@ async def on_message(message):
 
 #no-command-error
 
-#@client.event
-#async def on_command_error(ctx, error):
-#  if isinstance(error, commands.CommandNotFound):
-#   
-#    with open("prefixes.json", "r") as f:
-#      prefixes = json.load(f)
-#      
-#      pre = prefixes[str(ctx.guild.id)]
-
-#    await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
+@client.event
+async def on_command_error(ctx, error):
+  if isinstance(error, commands.CommandNotFound):
+   
+    with open("prefixes.json", "r") as f:
+      prefixes = json.load(f)
+      
+      pre = prefixes[str(ctx.guild.id)]
+    await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
+		elif isinstance(error, commands.BotMissingPermissions):
+    	await ctx.channel.send('**Oof, i dont have enough rights to do this!')
 
 #bot-not-enough-rights
-
-#@client.event
-#async def on_command_error(ctx, error):
-#  if isinstance(error, commands.BotMissingPermissions):
-#    await ctx.channel.send('**Oof, i dont have enough rights to do this!')
 
 #bot-activity
 
@@ -1216,7 +1212,7 @@ async def meme(ctx):
 @client.command()
 async def dog(ctx):
   async with aiohttp.ClientSession() as cs:
-    async with cs.get('https://www.reddit.com/r/DogPics//new.json?sort=hot') as r:
+    async with cs.get('https://www.reddit.com/r/DogPics/new.json?sort=hot') as r:
         res = await r.json()
         embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
         embed.set_author(name="Random Dog", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
