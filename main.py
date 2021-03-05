@@ -1216,7 +1216,7 @@ async def dog(ctx):
         res = await r.json()
         embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
         embed.set_author(name="Random Dog", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-        embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+        embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url_overridden_by_dest'])
         await ctx.send(embed=embed)
 
 @client.command()
