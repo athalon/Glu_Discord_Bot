@@ -147,7 +147,7 @@ async def help(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
     
-    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `banlist`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`, `poll`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Help Menu", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -199,6 +199,22 @@ async def unban(ctx):
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Unban Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
   embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`unban <discord name with #>")
+
+  await ctx.send(embed = embed)
+
+@help.command()
+async def banlist(ctx):
+  
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  embed = discord.Embed(description = "Shows you the banlist of this server!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Banlist Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`banlist")
 
   await ctx.send(embed = embed)
 
@@ -575,6 +591,17 @@ async def userinfo(ctx):
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Userinfo Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
   embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{ctx.prefix}`userinfo <member>")
+
+  await ctx.send(embed = embed)
+
+@help.command()
+async def poll(ctx):
+
+  embed = discord.Embed(description = "Makes a poll in a specific channel!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Poll Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{ctx.prefix}`poll [poll message]")
 
   await ctx.send(embed = embed)
 
@@ -1095,28 +1122,49 @@ async def userinfo(ctx, member: discord.Member = None):
 
   embed.add_field(name=":crown: Top Role", value=member.top_role.mention)
 
-  embed.add_field(name=":robot: Bot?", value=member.bot)
-
+  embed.add_field(name=":robot: Bot", value=member.bot)
   await ctx.send(embed=embed)
 
+#poll-command
+
 @client.command()
+@commands.has_permissions(manage_messages=True)
 async def poll(ctx, channel: discord.TextChannel, msg):
+
   em = discord.Embed(
-    description = f"{msg}",
-    colour = default_color,
-    timestamp = ctx.message.created_at
-  )
-  em.set_author(name=f"Poll by {str(ctx.message.author)}", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  await poll_channel.send(embed=em)
-  
-  em = discord.Embed(
-    description = f"The Poll was created!\nView it in {poll_channel.mention}",
+    description = f"✅ The Poll was created! \n➡️ View it in {channel.mention}",
     colour = default_color,
     timestamp = ctx.message.created_at
   )
   em.set_author(name="Poll created!", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  await channel.send(embed=em)
+  em.set_footer(text=client.user.name)
+  await ctx.send(embed=em)
 
+  embed = discord.Embed(
+    description = f"{msg}",
+    colour = default_color,
+    timestamp = ctx.message.created_at
+  )
+  embed.set_author(name=f"Poll by {str(ctx.message.author)}", icon_url = 'https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.set_footer(text=client.user.name)
+
+  pollreaction = await channel.send(embed = embed)
+  
+  await pollreaction.add_reaction("✅")
+  await pollreaction.add_reaction("🤷🏻‍♀️")
+  await pollreaction.add_reaction("❎")
+
+@poll.error
+async def poll_error(ctx, error):
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  if isinstance(error, commands.MissingPermissions):
+    await ctx.send('**Huh! , You don´t have enough rights to make a poll!**')
+  elif isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send(f'**Make sure that you use the command correctly! {pre}poll [poll message]**')
 
 #fun
 #meme
@@ -1176,6 +1224,8 @@ async def iq_error(ctx, error):
 
   if isinstance(error, commands.MissingRequiredArgument):
     await ctx.send(f'**Make sure that you use the command correctly! {pre}iq <member>**')
+
+#cookie commands
 
 @client.command(description="Keks!")
 async def cookie(ctx):
@@ -1387,6 +1437,11 @@ async def reroll_error(ctx, error):
   if isinstance(error, commands.MissingRole):
     await ctx.send('You need a role named: `giveaway`!')
 
+@client.command()
+@commands.has_role(816399671702454323)
+async def shutdown(ctx):
+	await ctx.send("Shutting down bot...")
+	await client.logout()
 
 keep_alive.keep_alive()
 
