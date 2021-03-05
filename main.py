@@ -1170,13 +1170,33 @@ async def poll_error(ctx, error):
 #fun
 #meme
 
-@client.command(pass_context=True)
+@client.command()
 async def meme(ctx):
   async with aiohttp.ClientSession() as cs:
     async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
         res = await r.json()
         embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
         embed.set_author(name="Random Meme", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+        embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+        await ctx.send(embed=embed)
+
+@client.command()
+async def dog(ctx):
+  async with aiohttp.ClientSession() as cs:
+    async with cs.get('https://www.reddit.com/r/DOG/new.json?sort=hot') as r:
+        res = await r.json()
+        embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
+        embed.set_author(name="Random Dog", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+        embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+        await ctx.send(embed=embed)
+
+@client.command()
+async def cat(ctx):
+  async with aiohttp.ClientSession() as cs:
+    async with cs.get('https://www.reddit.com/r/cat/new.json?sort=hot') as r:
+        res = await r.json()
+        embed = discord.Embed(colour=default_color, timestamp=ctx.message.created_at)
+        embed.set_author(name="Random Cat", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
         embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
         await ctx.send(embed=embed)
 
