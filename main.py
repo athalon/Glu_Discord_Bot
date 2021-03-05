@@ -1300,10 +1300,10 @@ async def server(ctx):
 			colour = default_color,
 			timestamp = ctx.message.created_at
 		)
-		embed.set_footer(text=f"{client.user.name}")
-  	embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-		await ctx.send(embed=embed)
-
+    embed.set_footer(text=f"{client.user.name}")
+    embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+    await ctx.send(embed=embed)
+  
   embed = discord.Embed(description=f"The `{client.user.name}` is currently on `{len(client.guilds)}` Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
