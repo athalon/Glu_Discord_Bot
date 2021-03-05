@@ -1,4 +1,4 @@
-import discord #tt
+import discord
 from discord.ext import commands, tasks
 import json
 import aiohttp
