@@ -82,48 +82,48 @@ async def changeprefix_error(ctx, error):
     await ctx.send(f'**Make sure that you use the command correctly! {pre}changeprefix [prefix]**')
 
 @client.event
-async def on_message(ctx):
+async def on_message(message):
 
     try:
-        if ctx.mentions[0] == client.user:
+        if message.mentions[0] == client.user:
 
             with open("prefixes.json", "r") as f:
                 prefixes = json.load(f)
 
-            pre = prefixes[str(ctx.guild.id)]
+            pre = prefixes[str(message.guild.id)]
 
             embed=discord.Embed(#title="#", 
             description=f"My prefix here is `{pre}`", 
             color=default_color
             )
             embed.set_footer(text=f"{client.user.name} | Since 28.02.2021")
-            embed.set_author(name=f"My Prefix in {ctx.guild.name}", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-            await ctx.channel.send(embed=embed)
+            embed.set_author(name=f"My Prefix in {message.guild.name}", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+            await message.channel.send(embed=embed)
 
     except:
         pass
 
-    await client.process_commands(ctx)
+    await client.process_commands(message)
 
 #no-command-error
 
-@client.event
-async def on_command_error(ctx, error):
-  if isinstance(error, commands.CommandNotFound):
-   
-    with open("prefixes.json", "r") as f:
-      prefixes = json.load(f)
-      
-      pre = prefixes[str(ctx.guild.id)]
+#@client.event
+#async def on_command_error(ctx, error):
+#  if isinstance(error, commands.CommandNotFound):
+#   
+#    with open("prefixes.json", "r") as f:
+#      prefixes = json.load(f)
+#      
+#      pre = prefixes[str(ctx.guild.id)]
 
-    await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
+#    await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
 
 #bot-not-enough-rights
 
-@client.event
-async def on_command_error(ctx, error):
-  if isinstance(error, commands.BotMissingPermissions):
-    await ctx.channel.send('**Oof, i dont have enough rights to do this!')
+#@client.event
+#async def on_command_error(ctx, error):
+#  if isinstance(error, commands.BotMissingPermissions):
+#    await ctx.channel.send('**Oof, i dont have enough rights to do this!')
 
 #bot-activity
 
@@ -1280,7 +1280,7 @@ async def iq_error(ctx, error):
   if isinstance(error, commands.MissingRequiredArgument):
     await ctx.send(f'**Make sure that you use the command correctly! {pre}rps**')
 
-#servers-for-me
+#servers
 
 @client.command()
 async def servers(ctx):
@@ -1289,19 +1289,24 @@ async def servers(ctx):
   embed.set_author(name="In how many servers am I?", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
   await ctx.send(embed=embed)
 
+#server secret
 
 @client.command()
 @commands.has_role(816399671702454323)
 async def server(ctx):
-  msg = ""
   for guild in client.guilds:
-    msg += f"**Server Name:** `{guild.name}`\n**Member Count:** `{guild.member_count}`\n**ID:** {guild.id}\n\n"
+    embed = discord.Embed(
+			description = f"**Server Name:** `{guild.name}`\n**Member Count:** `{guild.member_count}`\n**ID:** {guild.id}\n\n",
+			colour = default_color,
+			timestamp = ctx.message.created_at
+		)
+		embed.set_footer(text=f"{client.user.name}")
+  	embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+		await ctx.send(embed=embed)
+
   embed = discord.Embed(description=f"The `{client.user.name}` is currently on `{len(client.guilds)}` Servers!\nNot that many but im happy about every server i am in! :smile:", colour=default_color, timestamp=ctx.message.created_at)
-  print(msg)
   embed.set_footer(text=f"{client.user.name}")
   embed.set_author(name="Servers", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
-  embed.add_field(name="Server List:", value=msg, inline=False)
-
   await ctx.send(embed=embed)
 
 
