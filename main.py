@@ -148,7 +148,7 @@ async def help(ctx):
     
     pre = prefixes[str(ctx.guild.id)]
     
-    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `banlist`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`, `poll`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
+    embed = discord.Embed(description = f"Remeber -> when you ping me, ill show you the Prefix on this server!\nPlease use `{pre}`help <command> for more details!\n\n:gear: Moderation\n`kick`, `ban`, `unban`, `banlist`, `clear`, `mute`, `unmute`, `giverole`, `removerole`, `warn`, `lockdown`, `unlock`\n\n:black_joker: Fun\n`meme`, `lost`, `iq`, `cookie`, `rps`, `dog`, `cat`\n\n:tada: Giveaway\n`giveaway`, `reroll`\n\n:white_check_mark: Bot Settings\n`changeprefix`, `ping`\n\n:information_source: Information\n`serverinfo`, `userinfo`, `poll`\n\n:flame: The {client.user.name} bot\n`invite`, `support`, `servers`, `bug`, `suggest`", color=default_color, timestamp=ctx.message.created_at)
 
     embed.set_footer(text=f"{client.user.name}")
     embed.set_author(name="Help Menu", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
@@ -170,6 +170,39 @@ async def kick(ctx):
   embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`kick <member> [Reason]")
 
   await ctx.send(embed = embed)
+
+@help.command()
+async def cat(ctx):
+  
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  embed = discord.Embed(description = "Sends a random cat image!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Cat Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`cat")
+
+  await ctx.send(embed = embed)
+
+@help.command()
+async def dog(ctx):
+  
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    
+    pre = prefixes[str(ctx.guild.id)]
+
+  embed = discord.Embed(description = "Sends a random dog image!", color=default_color, timestamp=ctx.message.created_at)
+
+  embed.set_footer(text=f"{client.user.name}")
+  embed.set_author(name="Dog Help", icon_url='https://cdn.discordapp.com/avatars/815665893660033064/08fa62ab175459c6dfd5e5d162696e4b.png?size=128')
+  embed.add_field(name = ":white_check_mark: **Syntax**",value = f"`{pre}`dog")
+
+  await ctx.send(embed = embed)
+
 
 @help.command()
 async def ban(ctx):
