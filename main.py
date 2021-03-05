@@ -116,8 +116,8 @@ async def on_command_error(ctx, error):
       
       pre = prefixes[str(ctx.guild.id)]
     await ctx.channel.send(f'**No command found!** \nCheck whether you have spelled the command correctly! Use -> {pre}help for this')
-		elif isinstance(error, commands.BotMissingPermissions):
-    	await ctx.channel.send('**Oof, i dont have enough rights to do this!')
+  elif isinstance(error, commands.BotMissingPermissions):
+    await ctx.channel.send('**Oof, i dont have enough rights to do this!')
 
 #bot-not-enough-rights
 
